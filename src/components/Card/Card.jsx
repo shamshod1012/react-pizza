@@ -15,13 +15,13 @@ export const Card = ({ img, price, nomi }) => {
       <div className="section-pitsa">
         <div className="section-pitsa-top">
           <p
-            className={toifa == "yupqa" ? "card-current-section" : ""}
+            className={toifa === "yupqa" ? "card-current-section" : ""}
             onClick={() => setToifa("yupqa")}
           >
             Yupqa
           </p>
           <p
-            className={toifa == "ananaviy" ? "card-current-section" : ""}
+            className={toifa === "ananaviy" ? "card-current-section" : ""}
             onClick={() => setToifa("ananaviy")}
           >
             Ananaviy
@@ -29,19 +29,19 @@ export const Card = ({ img, price, nomi }) => {
         </div>
         <div className="section-pitsa-bottom">
           <p
-            className={razmer == 26 ? "card-current-section" : ""}
+            className={razmer === 26 ? "card-current-section" : ""}
             onClick={() => setRazmer(26)}
           >
             26 cm
           </p>
           <p
-            className={razmer == 30 ? "card-current-section" : ""}
+            className={razmer === 30 ? "card-current-section" : ""}
             onClick={() => setRazmer(30)}
           >
             30 cm
           </p>
           <p
-            className={razmer == 40 ? "card-current-section" : ""}
+            className={razmer === 40 ? "card-current-section" : ""}
             onClick={() => setRazmer(40)}
           >
             40 cm

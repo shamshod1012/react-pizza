@@ -14,7 +14,6 @@ export const Cards = (props) => {
   });
   const toifalar = ["hammasi", ...new Set(testToifalar)];
 
-  const [toifa, setToifa] = useState();
   const [hozirgiToifa, setHozirgiToifa] = useState("hammasi");
   function setPizza(toifa) {
     console.log(toifa);
