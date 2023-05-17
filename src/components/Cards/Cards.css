@@ -1,0 +1,48 @@
+.main-header {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.toifaBtn {
+  border: none;
+  background-color: #eaeaea;
+  padding: 0.4rem 1rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  font-size: small;
+  margin: 0 8px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.filterSelect {
+  border: none;
+  font-size: 20px;
+  color: #fe5f1e;
+}
+.filterLabel {
+  font-weight: 500;
+  font-size: 17px;
+  margin-left: 15px;
+}
+.main-cards-title {
+  font-weight: 700;
+  font-size: 30px;
+}
+.main-cards {
+  margin-top: 3rem;
+}
+.main-cards-all {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1.7rem;
+  row-gap: 1rem;
+}
+.main-header-left {
+  display: flex;
+  width: 700px;
+}
+.hozirgiToifa {
+  background-color: #282828;
+  color: #fff;
+}
