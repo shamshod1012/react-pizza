@@ -342,3 +342,4 @@ export const pitsalar = [
     toifa: "pishloqli",
   },
 ];
+
