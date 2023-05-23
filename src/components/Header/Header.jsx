@@ -23,7 +23,7 @@ export const Header = ({ show }) => {
         <div className="header-right">
           <Link to={"./orders"}>
             {" "}
-            <p>77800 so'm</p>
+            <p>500 ₽</p>
             <span></span>
             <p>
               <BsCart className="header-cart" /> 1

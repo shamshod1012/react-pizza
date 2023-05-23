@@ -31,7 +31,7 @@
 }
 .header-right a {
   display: flex;
-  width: 250px;
+  width: 150px;
   height: 50px;
   border-radius: 30px;
   display: flex;
@@ -49,7 +49,7 @@
 }
 .header-right p {
   color: #000;
-  width: 120px;
+  width: 70px;
   display: flex;
   justify-content: center;
   text-decoration: none;
