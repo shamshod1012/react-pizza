@@ -1,4 +1,6 @@
-const initialState = {};
+const initialState = {
+  pizzas: [],
+};
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {

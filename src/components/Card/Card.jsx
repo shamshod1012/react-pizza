@@ -49,7 +49,7 @@ export const Card = ({ img, price, nomi }) => {
         </div>
       </div>
       <div className="card-footer">
-        <p className="card-price">{price} so'm</p>
+        <p className="card-price">{price} ₽</p>
         <div className="add-button">+ Qo'shish</div>
       </div>
     </div>
