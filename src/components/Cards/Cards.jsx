@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Card } from "../Card/";
+import { VscTriangleUp, VscTriangleDown } from "react-icons/vsc";
 
 import "./Cards.css";
 
@@ -29,6 +30,14 @@ export const Cards = (props) => {
     }
   }
 
+  const listItems = [
+    { id: 1, title: "Mashhurlik" },
+    { id: 2, title: "Narxi" },
+    { id: 3, title: "Alifbo" },
+  ];
+
+  const [active, setActive] = useState(false);
+  const [activeItem, setActiveItem] = useState("Mashhurlik");
   return (
     <main>
       <div className="main-header">
@@ -50,13 +59,25 @@ export const Cards = (props) => {
         </div>
 
         <div className="main-header-right">
-          <select className="filterSelect" name="filterSelect" id="">
-            <option value="">Narxi</option>
-            <option value="">Alifbo Tartibi</option>
-          </select>
-          <label className="filterLabel" htmlFor="filterSelect">
-            Bo'yicha saralash
-          </label>
+          <div
+            className="filter-select"
+            onClick={() => setActive((value) => !value)}
+          >
+            <p>
+              <p>{active ? <VscTriangleUp /> : <VscTriangleDown />}</p>
+              <span>{activeItem}</span>
+              bo'yicha saralash
+            </p>
+            <ul className={active ? "filter-list" : "hide-filter-list"}>
+              {listItems.map((item) => {
+                return (
+                  <li onClick={() => setActiveItem(item.title)} key={item.id}>
+                    {item.title}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </div>
 
