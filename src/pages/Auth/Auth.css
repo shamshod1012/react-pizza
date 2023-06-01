@@ -1,66 +1,141 @@
-.auth-page {
-  width: 400px;
-  height: 570px;
+/* .auth-page {
   background-color: #fff;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgb(168, 168, 168);
   text-transform: capitalize;
+  border: 1px solid red;
+} */
+
+body {
+  overflow-x: hidden;
+}
+.auth-page {
 }
 
 .auth-page h1 {
   width: 100%;
   text-align: center;
-  padding: 10px;
+  padding: 0.625rem;
 }
 .auth-page p {
   cursor: pointer;
   width: 100%;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 1.25rem;
+}
+.auth-page-wrapper {
+  background-color: #fff;
+  border-radius: 0.9375rem;
+  box-shadow: 0 0.3125rem 15px rgb(168, 168, 168);
+  text-transform: capitalize;
+  padding: 1rem;
 }
 
 .auth-page p:hover {
   color: rgb(84, 84, 84);
 }
 
+/* .auth-page form {
+  border: 1px solid red;
+} */
+
 .auth-page form button {
-  width: 300px;
-  height: 50px;
-  border-radius: 10px;
+  width: 18.75rem;
+  height: 3.125rem;
+  border-radius: 0.625rem;
   border: none;
   background-color: rgb(255, 179, 0);
+
+  margin: 8px 0;
 
   color: #fff;
   font-size: x-large;
   cursor: pointer;
   transition: 0.4s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .auth-page form button:hover {
   background-color: rgb(255, 204, 86);
 }
+.auth-page form button:active {
+  transform: scale(0.98);
+}
+
 .auth-page form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .auth-page form input {
-  width: 300px;
-  padding: 5px;
-  height: 40px;
-  margin: 20px 0;
-  font-size: 17px;
+  padding: 0.3125rem;
+  height: 2.5rem;
+  margin: 1.25rem 0;
+  font-size: 1.0625rem;
   outline-color: rgb(255, 179, 0);
 }
-.auth-page form div {
+.input-bg-cont {
   display: flex;
-  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 .auth-page form div label {
-  margin-top: 4px;
-  margin-right: 9px;
+  margin-top: 0.25rem;
+  margin-right: 0.5625rem;
 }
 
 .auth-img {
-  margin-top: 30px;
+  margin-top: 1.875rem;
   width: 100%;
+}
+.google-icon {
+  font-size: 1.875rem;
+  margin-right: 0.3125rem;
+}
+
+.loading-auth {
+  font-size: 1.875rem;
+  margin-right: 0.625rem;
+  animation-name: animation;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes animation {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.alert-wrapper {
+  position: absolute;
+
+  top: 3.75rem;
+  right: 6.25rem;
+
+  animation-name: animationAlert;
+  animation-duration: 1s;
+}
+
+/* .MuiAlert-standard {
+  width: 30rem;
+  height: 5rem;
+} */
+
+@keyframes animationAlert {
+  from {
+    right: -30rem;
+  }
+  to {
+    right: 6.25rem;
+  }
+}
+.errorMessage {
+  color: Red;
+}
+.input-cont {
+  display: flex;
 }

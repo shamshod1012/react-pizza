@@ -1,5 +1,6 @@
 const initialState = {
-  pizzas: [],
+  allPizzas: [],
+  orders: [],
 };
 
 const reducer = (state = initialState, { type, payload }) => {
