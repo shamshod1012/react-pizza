@@ -25,11 +25,13 @@
   flex-direction: column;
   justify-content: space-evenly;
   border-radius: 10px;
+  padding: 3px;
   background-color: #e5e5e5;
 }
 .section-pitsa-top {
   display: flex;
   justify-content: space-evenly;
+  margin: 3px 0;
 }
 
 .section-pitsa-top p {
@@ -48,6 +50,7 @@
 .section-pitsa-bottom {
   display: flex;
   justify-content: space-evenly;
+  margin: 3px 0;
 }
 .section-pitsa-bottom p {
   cursor: pointer;
@@ -80,7 +83,7 @@
   align-items: center;
 }
 .add-button {
-  width: 110px;
+  width: 140px;
   border: 1px solid #eb5a1e;
   height: 40px;
   border-radius: 30px;

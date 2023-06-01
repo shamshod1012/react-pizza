@@ -1,6 +1,9 @@
 import React from "react";
 import { BsFillPersonFill, BsPersonCircle, BsPersonLock } from "react-icons/bs";
-import "../Auth/Auth.css";
+import { Link } from "react-router-dom";
+
+import "./Login.css";
+
 export const Login = () => {
   return (
     <div className="auth-page">
@@ -23,7 +26,9 @@ export const Login = () => {
         </div>
         <button type="submit">Login</button>
       </form>
-      <p>Dont have account?</p>
+      <Link to={"/auth"}>
+        <p>Dont have account?</p>
+      </Link>
     </div>
   );
 };
