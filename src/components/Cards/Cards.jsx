@@ -1,13 +1,10 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import { Card } from "../Card/";
 import { VscTriangleUp, VscTriangleDown } from "react-icons/vsc";
-
+import { MyLoader } from "../loadingSkeleton";
 import "./Cards.css";
 
-export const Cards = (props) => {
-  const { data, loading } = props;
-
+export const Cards = ({ data, loading }) => {
   const [pitsalar, setPitsalar] = useState(data);
 
   const testToifalar = data.map((element) => {
@@ -16,6 +13,11 @@ export const Cards = (props) => {
   const toifalar = ["hammasi", ...new Set(testToifalar)];
 
   const [hozirgiToifa, setHozirgiToifa] = useState("hammasi");
+
+  useEffect(() => {
+    setPitsalar(data);
+  }, [loading]);
+
   function setPizza(toifa) {
     if (toifa === "hammasi") {
       setPitsalar(data);
@@ -29,6 +31,7 @@ export const Cards = (props) => {
     }
   }
 
+  const fakeArr = new Array(8).fill([]);
   const listItems = [
     { id: 1, title: "Mashhurlik" },
     { id: 2, title: "Narxi" },
@@ -44,10 +47,10 @@ export const Cards = (props) => {
           {toifalar.map((toifa, i) => {
             return (
               <button
+                key={i}
                 onClick={() => {
                   setPizza(toifa);
                 }}
-                key={i}
                 className={
                   hozirgiToifa === toifa ? "toifaBtn hozirgiToifa" : "toifaBtn"
                 }
@@ -71,7 +74,7 @@ export const Cards = (props) => {
             <ul className={active ? "filter-list" : "hide-filter-list"}>
               {listItems.map((item) => {
                 return (
-                  <li onClick={() => setActiveItem(item.title)} key={item.id}>
+                  <li key={item.id} onClick={() => setActiveItem(item.title)}>
                     {item.title}
                   </li>
                 );
@@ -89,9 +92,13 @@ export const Cards = (props) => {
       >
         <div className="main-cards-title">Barcha Pitsalar</div>
         <div className="main-cards-all">
-          {pitsalar.map((pitsa) => {
-            return <Card key={pitsa.id} {...pitsa} />;
-          })}
+          {loading
+            ? fakeArr.map((item, index) => {
+                return <MyLoader key={index} />;
+              })
+            : pitsalar.map((pitsa) => {
+                return <Card key={pitsa.id} {...pitsa} />;
+              })}
         </div>
       </div>
     </main>
