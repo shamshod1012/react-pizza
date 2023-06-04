@@ -112,7 +112,7 @@ export const pitsalar = {
     },
     {
       id: 12,
-      nomi: " Go'shtli va Pomidorli",
+      nomi: "Go'shtli va Pomidorli",
       img: "https://s-pom.ru/upload/resize_cache/iblock/edf/1470_1180_1/edf94f29d20dd0d0dafdc4d00e3923be.png",
       price: "590",
       qalinlik: "yupqa",
