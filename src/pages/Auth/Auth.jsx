@@ -38,6 +38,7 @@ export const Auth = () => {
 
       setIsAccLoading(false);
       setShowAlert(true);
+      localStorage.setItem("isUser", true);
       setTimeout(() => {
         setShowAlert(false);
         navigate("/");
@@ -57,7 +58,7 @@ export const Auth = () => {
     try {
       await signInWithPopup(auth, googleProvider);
       setShowAlert(true);
-      console.log("show alert");
+      localStorage.setItem("isUser", true);
       setTimeout(() => {
         setShowAlert(false);
         navigate("/");
@@ -66,7 +67,6 @@ export const Auth = () => {
       console.error(error);
     }
   };
-  console.log(errors);
   /*
    ==============================================
    */

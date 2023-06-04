@@ -9,35 +9,39 @@
 body {
   overflow-x: hidden;
 }
-.auth-page {
-}
 
 .auth-page h1 {
   width: 100%;
   text-align: center;
   padding: 0.625rem;
 }
+
+.auth-page a {
+  text-decoration: none;
+  color: #000;
+}
 .auth-page p {
   cursor: pointer;
   width: 100%;
-  text-align: center;
-  margin-top: 1.25rem;
+  position: absolute;
+  bottom: 1.5rem;
+  left: 25%;
+  font-size: 18px;
 }
 .auth-page-wrapper {
+  width: 400px;
+  height: 700px;
   background-color: #fff;
   border-radius: 0.9375rem;
   box-shadow: 0 0.3125rem 15px rgb(168, 168, 168);
   text-transform: capitalize;
-  padding: 1rem;
+  padding: 3rem;
+  position: relative;
 }
 
 .auth-page p:hover {
   color: rgb(84, 84, 84);
 }
-
-/* .auth-page form {
-  border: 1px solid red;
-} */
 
 .auth-page form button {
   width: 18.75rem;
@@ -71,6 +75,7 @@ body {
 .auth-page form input {
   padding: 0.3125rem;
   height: 2.5rem;
+  width: 100%;
   margin: 1.25rem 0;
   font-size: 1.0625rem;
   outline-color: rgb(255, 179, 0);
@@ -120,11 +125,6 @@ body {
   animation-duration: 1s;
 }
 
-/* .MuiAlert-standard {
-  width: 30rem;
-  height: 5rem;
-} */
-
 @keyframes animationAlert {
   from {
     right: -30rem;
@@ -136,6 +136,12 @@ body {
 .errorMessage {
   color: Red;
 }
+
 .input-cont {
+  width: 100%;
   display: flex;
+  align-items: center;
+}
+.input-bg-cont {
+  width: 100%;
 }

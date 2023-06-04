@@ -8,6 +8,7 @@
   height: 430px;
   display: flex;
   flex-direction: column;
+  pointer-events: auto;
 }
 .card-title {
   text-transform: capitalize;
