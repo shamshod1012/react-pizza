@@ -6,7 +6,7 @@ import { VscTriangleUp, VscTriangleDown } from "react-icons/vsc";
 import "./Cards.css";
 
 export const Cards = (props) => {
-  const { data } = props;
+  const { data, loading } = props;
 
   const [pitsalar, setPitsalar] = useState(data);
 
@@ -17,7 +17,6 @@ export const Cards = (props) => {
 
   const [hozirgiToifa, setHozirgiToifa] = useState("hammasi");
   function setPizza(toifa) {
-    console.log(toifa);
     if (toifa === "hammasi") {
       setPitsalar(data);
       setHozirgiToifa("hammasi");
@@ -42,12 +41,13 @@ export const Cards = (props) => {
     <main>
       <div className="main-header">
         <div className="main-header-left">
-          {toifalar.map((toifa) => {
+          {toifalar.map((toifa, i) => {
             return (
               <button
                 onClick={() => {
                   setPizza(toifa);
                 }}
+                key={i}
                 className={
                   hozirgiToifa === toifa ? "toifaBtn hozirgiToifa" : "toifaBtn"
                 }
@@ -64,7 +64,7 @@ export const Cards = (props) => {
             onClick={() => setActive((value) => !value)}
           >
             <p>
-              <p>{active ? <VscTriangleUp /> : <VscTriangleDown />}</p>
+              <span>{active ? <VscTriangleUp /> : <VscTriangleDown />}</span>
               <span>{activeItem}</span>
               bo'yicha saralash
             </p>
@@ -81,7 +81,12 @@ export const Cards = (props) => {
         </div>
       </div>
 
-      <div className="main-cards">
+      <div
+        className="main-cards"
+        onClick={() => {
+          setActive(false);
+        }}
+      >
         <div className="main-cards-title">Barcha Pitsalar</div>
         <div className="main-cards-all">
           {pitsalar.map((pitsa) => {
