@@ -123,6 +123,7 @@ body {
 
   animation-name: animationAlert;
   animation-duration: 1s;
+  z-index: 10;
 }
 
 @keyframes animationAlert {

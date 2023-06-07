@@ -57,8 +57,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #c3c3c3;
+  color: #747474;
   text-decoration: none;
+  transition: 0.4s;
+  font-size: 16px;
+}
+.return-home a:hover {
+  background-color: #000;
+  color: #fff;
+}
+.order-arrow {
+  transition: 0.4s;
+  color: #747474;
+}
+.return-home a:hover .order-arrow {
+  transform: translateX(-10px);
+  color: #fff;
 }
 
 .orders-footer-right {
@@ -88,4 +102,20 @@
   justify-content: center;
   color: #fff;
   background-color: #fe5f1e;
+}
+.empty-order {
+  display: flex;
+  justify-content: center;
+}
+.empty-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 560px;
+  height: 330px;
+}
+.empty-wrapper p {
+  font-size: 18px;
+  font-weight: 400;
 }
