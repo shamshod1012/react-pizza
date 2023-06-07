@@ -4,7 +4,7 @@ import { VscTriangleUp, VscTriangleDown } from "react-icons/vsc";
 import { MyLoader } from "../loadingSkeleton";
 import "./Cards.css";
 
-export const Cards = ({ data, loading }) => {
+export const Cards = ({ setPizzas, data, loading, getOrder }) => {
   const [pitsalar, setPitsalar] = useState(data);
 
   const testToifalar = data.map((element) => {
@@ -97,7 +97,14 @@ export const Cards = ({ data, loading }) => {
                 return <MyLoader key={index} />;
               })
             : pitsalar.map((pitsa) => {
-                return <Card key={pitsa.id} {...pitsa} />;
+                return (
+                  <Card
+                    key={pitsa.id}
+                    getOrder={getOrder}
+                    setPizzas={setPizzas}
+                    {...pitsa}
+                  />
+                );
               })}
         </div>
       </div>

@@ -1,10 +1,77 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import { db } from "../../config/firebase";
+import {
+  collection,
+  addDoc,
+  updateDoc,
+  getDocs,
+  doc,
+} from "firebase/firestore";
 
 import "./Card.css";
 
-export const Card = ({ img, price, nomi }) => {
-  const [toifa, setToifa] = useState("yupqa");
+export const Card = ({
+  img,
+  price,
+  nomi,
+  miqdor = 0,
+  id,
+  setPizzas,
+  getOrder,
+}) => {
+  const [tur, settur] = useState("yupqa");
   const [razmer, setRazmer] = useState(26);
+  const [PizzaMiqdor, setPizzaMiqdor] = useState(miqdor);
+
+  const collectionOrder = collection(db, "order");
+  const collectionPizzas = collection(db, "pizzas");
+
+  const addOrder = async () => {
+    const orders = await getItems(collectionOrder);
+
+    const updatedPizzaMiqdor = PizzaMiqdor + 1;
+    setPizzaMiqdor(updatedPizzaMiqdor);
+    const editingItem = doc(db, "pizzas", id);
+    await updateDoc(editingItem, { miqdor: updatedPizzaMiqdor });
+
+    const isorder = orders.some((item) => {
+      return item.id === id && item.tur === tur && item.razmer === razmer;
+    });
+
+    if (!isorder) {
+      const newPizza = {
+        id: id,
+        img: img,
+        nomi: nomi,
+        price: price,
+        tur: tur,
+        razmer: razmer,
+        miqdor: 1,
+      };
+      await addDoc(collectionOrder, newPizza);
+    } else {
+      const test = orders.filter((item) => {
+        return item.id === id && item.tur === tur && item.razmer === razmer;
+      });
+
+      const editingItem = doc(db, "order", test[0].editid);
+      updateDoc(editingItem, { miqdor: test[0].miqdor + 1 });
+    }
+    getOrder();
+  };
+
+  const getItems = async (coll) => {
+    const data = await getDocs(coll);
+    const filteredItems = data.docs.map((item) => {
+      return { ...item.data(), editid: item.id };
+    });
+    return filteredItems;
+  };
+
+  // useEffect(() => {
+  //   getItems(collectionOrder);
+  // }, []);
 
   return (
     <div className="card-container">
@@ -15,14 +82,14 @@ export const Card = ({ img, price, nomi }) => {
       <div className="section-pitsa">
         <div className="section-pitsa-top">
           <p
-            className={toifa === "yupqa" ? "card-current-section" : ""}
-            onClick={() => setToifa("yupqa")}
+            className={tur === "yupqa" ? "card-current-section" : ""}
+            onClick={() => settur("yupqa")}
           >
             Yupqa
           </p>
           <p
-            className={toifa === "ananaviy" ? "card-current-section" : ""}
-            onClick={() => setToifa("ananaviy")}
+            className={tur === "ananaviy" ? "card-current-section" : ""}
+            onClick={() => settur("ananaviy")}
           >
             Ananaviy
           </p>
@@ -50,7 +117,9 @@ export const Card = ({ img, price, nomi }) => {
       </div>
       <div className="card-footer">
         <p className="card-price">{price} ₽</p>
-        <div className="add-button">+ Qo'shish</div>
+        <div className="add-button" onClick={addOrder}>
+          + Qo'shish {PizzaMiqdor > 0 ? <p>{PizzaMiqdor}</p> : null}
+        </div>
       </div>
     </div>
   );

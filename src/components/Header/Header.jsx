@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { BsCart } from "react-icons/bs";
-
+import { useSelector } from "react-redux";
 import "./Header.css";
 
 export const Header = ({ show }) => {
+  const { allCount, allPrice } = useSelector((state) => state);
   return (
     <div className="header">
       <div className="header-left">
@@ -23,10 +24,10 @@ export const Header = ({ show }) => {
         <div className="header-right">
           <Link to={"./orders"}>
             {" "}
-            <p>500 ₽</p>
+            <p>{allPrice} ₽</p>
             <span></span>
             <p>
-              <BsCart className="header-cart" /> 1
+              <BsCart className="header-cart" /> {allCount}
             </p>
           </Link>
         </div>

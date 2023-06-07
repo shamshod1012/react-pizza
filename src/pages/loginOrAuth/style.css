@@ -1,11 +1,23 @@
-.lodin-or-auth div {
+.btn-container {
   width: 300px;
   height: 50px;
   display: flex;
   justify-content: space-between;
 }
 
-.lodin-or-auth div a button {
+.login-or-auth {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login-or-auth header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.btn-container a button {
   width: 100px;
   height: 50px;
   background-color: none;
@@ -16,4 +28,3 @@
   color: #fff;
   font-size: large;
 }
-

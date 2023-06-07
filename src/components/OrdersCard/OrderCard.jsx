@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   AiOutlinePlusCircle,
@@ -6,33 +6,111 @@ import {
   AiOutlineCloseCircle,
 } from "react-icons/ai";
 
+import { db } from "../../config/firebase";
+import { updateDoc, doc, getDoc, deleteDoc } from "firebase/firestore";
 import "./OrderCard.css";
 
-export const OrderCard = () => {
+export const OrderCard = ({
+  nomi,
+  price,
+  id,
+  editid,
+  img,
+  tur,
+  razmer,
+  miqdor,
+  getOrders,
+  getOrdertest,
+}) => {
+  const [pizzamiqdor, setPizzamiqdor] = useState(miqdor);
+  const pizzaRef = doc(db, "pizzas", id);
+  const [isMinus, setIsMinus] = useState(false);
+
+  const plusCount = async () => {
+    const data = await getDoc(pizzaRef);
+    const singlePizza = data.data();
+    const updPizzaCount = singlePizza.miqdor;
+   
+    const editingItem = doc(db, "order", editid);
+    const editingPizzaAll = doc(db, "pizzas", id);
+    const updMiqdor = pizzamiqdor + 1;
+    setPizzamiqdor(updMiqdor);
+    
+    await updateDoc(editingItem, { miqdor: updMiqdor });
+    await updateDoc(editingPizzaAll, { miqdor: updPizzaCount + 1 });
+    if (updMiqdor !== 1) {
+      setIsMinus(true);
+    }
+    getOrdertest();
+  };
+
+  const minusCount = async () => {
+    const data = await getDoc(pizzaRef);
+    const singlePizza = data.data();
+    const updPizzaCount = singlePizza.miqdor;
+    const editingItem = doc(db, "order", editid);
+    const editingPizzaAll = doc(db, "pizzas", id);
+    const updMiqdor = pizzamiqdor - 1;
+    setPizzamiqdor(updMiqdor);
+    await updateDoc(editingItem, { miqdor: updMiqdor });
+    await updateDoc(editingPizzaAll, { miqdor: updPizzaCount - 1 });
+    if (updMiqdor === 1) {
+      setIsMinus(false);
+    }
+    getOrdertest();
+  };
+
+  useEffect(() => {
+    if (pizzamiqdor !== 1) {
+      setIsMinus(true);
+    } else if (pizzamiqdor === 1) {
+      setIsMinus(false);
+    }
+  }, [pizzamiqdor]);
+
+  const deletePizza = async () => {
+    const confirmation = window.confirm("are you sure to delete pizza?");
+    if (confirmation) {
+      const data = await getDoc(pizzaRef);
+      const singlePizza = data.data();
+      const updPizzaCount = singlePizza.miqdor;
+
+      const deletingItem = doc(db, "order", editid);
+
+      await updateDoc(pizzaRef, { miqdor: updPizzaCount - pizzamiqdor });
+      setPizzamiqdor(0);
+      await deleteDoc(deletingItem);
+      getOrders();
+    }
+    getOrdertest();
+  };
+
   return (
     <div className="order-card">
-      <img
-        src="https://s3.envato.com/files/287210036/Delicious%20Pizza%20Isolated%20over%20white%20background.jpg"
-        alt="pitsa rasmi"
-      />
+      <img src={img} alt="pitsa rasmi" />
 
       <div className="order-card-info">
-        <p className="order-card-title">Kolbasa, Bodring va Pishloqli</p>
-        <p className="order-card-desc">yupqa, 26 cm</p>
+        <p className="order-card-title">{nomi}</p>
+        <p className="order-card-desc">
+          {tur}, {razmer} cm
+        </p>
       </div>
 
       <div className="order-card-btns">
-        <p>
+        <p
+          onClick={minusCount}
+          className={isMinus ? "enabled-btn" : "disabled-btn"}
+        >
           <AiOutlineMinusCircle />
         </p>
-        <span>1</span>
-        <p>
+        <span>{pizzamiqdor}</span>
+        <p onClick={plusCount} className={"enabled-btn"}>
           <AiOutlinePlusCircle />
         </p>
       </div>
       <div className="order-card-right">
-        <p className="order-card-price">77800 so'm</p>
-        <p className="order-card-delete">
+        <p className="order-card-price">{price} ₽</p>
+        <p className="order-card-delete" onClick={deletePizza}>
           <AiOutlineCloseCircle />
         </p>
       </div>
