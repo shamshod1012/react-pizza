@@ -144,7 +144,11 @@ export const Orders = () => {
                   <p>
                     Umumiy narx: <span>{allPrice} ₽</span>
                   </p>
-                  <p className="pay-btn">Naqd to'lash</p>
+
+                  <p className="pay-btn">
+                    {" "}
+                    <Link to={"/payment"}>Buyurtma qilish</Link>
+                  </p>
                 </div>
               </div>{" "}
             </>

@@ -1,0 +1,26 @@
+.single-pizza-main {
+  display: flex;
+  align-items: center;
+}
+.single-pizza-main div {
+  margin-left: 30px;
+}
+.single-pizza-main div img {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+}
+.single-pizza-main div p {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+}
+.single-pizza-main div ul li {
+  margin-top: 10px;
+}
+.single-pizza-footer {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+}

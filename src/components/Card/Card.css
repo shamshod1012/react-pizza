@@ -74,7 +74,7 @@
 }
 .card-current-section {
   background: #ffffff;
-  box-shadow: 0px 5px 10px rgb(189, 189, 189);
+  box-shadow: 0px 0px 10px rgb(154, 154, 154);
   border-radius: 5px;
 }
 .card-footer {
