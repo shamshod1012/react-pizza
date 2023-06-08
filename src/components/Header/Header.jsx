@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BsCart } from "react-icons/bs";
 import { useSelector } from "react-redux";
+import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import "./Header.css";
 
 export const Header = ({ show }) => {
@@ -21,15 +22,23 @@ export const Header = ({ show }) => {
         </Link>
       </div>
       {!show ? (
-        <div className="header-right">
-          <Link to={"./orders"}>
-            {" "}
-            <p>{allPrice} ₽</p>
-            <span></span>
-            <p>
-              <BsCart className="header-cart" /> {allCount}
-            </p>
+        <div className="header-right-wrapper">
+          <Link to={"/addnewpizza"}>
+            <AiOutlineAppstoreAdd
+              size={30}
+              style={{ color: "#000", cursor: "pointer", marginRight: "20px" }}
+            />
           </Link>
+
+          <div className="header-right">
+            <Link to={"./orders"}>
+              <p>{allPrice} ₽</p>
+              <span></span>
+              <p>
+                <BsCart className="header-cart" /> {allCount}
+              </p>
+            </Link>
+          </div>
         </div>
       ) : (
         ""

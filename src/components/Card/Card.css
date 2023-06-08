@@ -2,7 +2,13 @@
   width: 230px;
   height: 230px;
   object-fit: cover;
+  cursor: pointer;
+  transition: 0.4s;
 }
+.img-cont img:hover {
+  transform: scale(1.07);
+}
+
 .card-container {
   width: 230px;
   height: 430px;
@@ -119,4 +125,7 @@
 .add-button:hover p {
   background-color: #fff;
   color: #eb5a1e;
+}
+.disabled-btn-order {
+  pointer-events: none;
 }

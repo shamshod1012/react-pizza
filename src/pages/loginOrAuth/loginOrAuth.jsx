@@ -7,7 +7,10 @@ export const LoginOrAuth = () => {
     <div className="login-or-auth">
       <header>
         <h1>Pizza Storega xush Kelibsiz</h1>
-        <p>Davom etish uchun akkaunt yarating (sign in), yoki Mavjud akkauntga kiring (login)</p>
+        <p>
+          Davom etish uchun akkaunt yarating (sign in), yoki Mavjud akkauntga
+          kiring (login)
+        </p>
       </header>
 
       <div className="btn-container">

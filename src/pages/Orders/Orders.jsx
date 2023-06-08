@@ -4,7 +4,13 @@ import { Header, Wrapper, OrderCard } from "../../components";
 import { BsTrash3, BsCart, BsFillCartFill } from "react-icons/bs";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { getDocs, collection } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  doc,
+  deleteDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { useSelector } from "react-redux";
 import "./Orders.css";
@@ -14,12 +20,12 @@ export const Orders = () => {
   const { allPrice, allCount } = useSelector((state) => state);
   const orderRef = collection(db, "order");
   const [data, setData] = useState([]);
+  const [allPizzas, setAllPizzas] = useState([]);
 
   const getOrders = async () => {
     const res = await getDocs(orderRef);
     const dataTest = res.docs.map((item) => {
       const length = Object.keys(item.data()).length;
-      // return length > 0 && item;
       return length > 0 && { ...item.data(), editid: item.id };
     });
 
@@ -53,9 +59,38 @@ export const Orders = () => {
     }
   };
 
+  const getPizzas = async () => {
+    const ref = collection(db, "pizzas");
+    const data = await getDocs(ref);
+    const filtered = data.docs.map((item) => {
+      return { ...item.data(), editid: item.id };
+    });
+    return filtered;
+  };
+
   useEffect(() => {
     getOrders();
   }, []);
+
+  const deleteAll = async () => {
+    const confirmation = window.confirm("Are you sure to clear all orders?");
+    if (confirmation) {
+      const pizzas = await getPizzas();
+      pizzas.map(async (item) => {
+        if (item.miqdor > 0) {
+          const editingref = doc(db, "pizzas", item.editid);
+          console.log(editingref);
+          await updateDoc(editingref, { miqdor: 0 });
+        }
+      });
+
+      data.map(async (pizza) => {
+        const deletingItem = doc(db, "order", pizza.editid);
+        await deleteDoc(deletingItem);
+      });
+    }
+    getOrders();
+  };
 
   return (
     <div className="orders">
@@ -72,7 +107,7 @@ export const Orders = () => {
                   <p>Savat</p>
                 </div>
 
-                <div className="orders-header-right">
+                <div className="orders-header-right" onClick={deleteAll}>
                   <p className="orders-trash">
                     <BsTrash3 />
                   </p>

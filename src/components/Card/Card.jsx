@@ -23,11 +23,12 @@ export const Card = ({
   const [tur, settur] = useState("yupqa");
   const [razmer, setRazmer] = useState(26);
   const [PizzaMiqdor, setPizzaMiqdor] = useState(miqdor);
-
+  const [loading, setLoading] = useState(false);
   const collectionOrder = collection(db, "order");
   const collectionPizzas = collection(db, "pizzas");
 
   const addOrder = async () => {
+    setLoading(true);
     const orders = await getItems(collectionOrder);
 
     const updatedPizzaMiqdor = PizzaMiqdor + 1;
@@ -59,6 +60,7 @@ export const Card = ({
       updateDoc(editingItem, { miqdor: test[0].miqdor + 1 });
     }
     getOrder();
+    setLoading(false);
   };
 
   const getItems = async (coll) => {
@@ -117,7 +119,10 @@ export const Card = ({
       </div>
       <div className="card-footer">
         <p className="card-price">{price} ₽</p>
-        <div className="add-button" onClick={addOrder}>
+        <div
+          className={loading ? "add-button disabled-btn-order" : "add-button"}
+          onClick={addOrder}
+        >
           + Qo'shish {PizzaMiqdor > 0 ? <p>{PizzaMiqdor}</p> : null}
         </div>
       </div>
