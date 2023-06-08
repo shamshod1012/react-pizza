@@ -4,3 +4,6 @@ export * from "./Orders";
 export * from "./Auth";
 export * from "./Login";
 export * from "./AddNewPizza";
+export * from "./Error";
+export * from "./SinglePizza";
+export * from "./Payment";

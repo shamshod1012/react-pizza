@@ -1,6 +1,15 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { Home, Orders, Auth, Login, AddNewPizza } from "./pages";
+import {
+  Home,
+  Orders,
+  Auth,
+  Login,
+  AddNewPizza,
+  Error,
+  SinglePizza,
+  Payment,
+} from "./pages";
 import { LoginOrAuth } from "./pages/LoginOrAuth/LoginOrAuth";
 import "./App.css";
 
@@ -26,8 +35,20 @@ const router = createBrowserRouter([
     element: <LoginOrAuth />,
   },
   {
-    path: "addnewpizza",
+    path: "/addnewpizza",
     element: <AddNewPizza />,
+  },
+  {
+    path: "*",
+    element: <Error />,
+  },
+  {
+    path: "/pizza/:id",
+    element: <SinglePizza />,
+  },
+  {
+    path: "/payment",
+    element: <Payment />,
   },
 ]);
 

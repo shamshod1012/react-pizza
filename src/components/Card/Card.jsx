@@ -8,7 +8,7 @@ import {
   getDocs,
   doc,
 } from "firebase/firestore";
-
+import { useNavigate } from "react-router-dom";
 import "./Card.css";
 
 export const Card = ({
@@ -26,6 +26,7 @@ export const Card = ({
   const [loading, setLoading] = useState(false);
   const collectionOrder = collection(db, "order");
   const collectionPizzas = collection(db, "pizzas");
+  const navigate = useNavigate();
 
   const addOrder = async () => {
     setLoading(true);
@@ -71,14 +72,14 @@ export const Card = ({
     return filteredItems;
   };
 
-  // useEffect(() => {
-  //   getItems(collectionOrder);
-  // }, []);
+  const onSubmitImg = () => {
+    navigate(`pizza/${id}`);
+  };
 
   return (
     <div className="card-container">
       <div className="img-cont">
-        <img src={img} alt="pitsa rasmi" />
+        <img onClick={onSubmitImg} src={img} alt="pitsa rasmi" />
       </div>
       <p className="card-title">{nomi}</p>
       <div className="section-pitsa">
