@@ -61,6 +61,11 @@
   margin: 0 6px;
 }
 
+.header-right-wrapper {
+  display: flex;
+  align-items: center;
+}
+
 /* .header-right {
   width: 250px;
   height: 50px;
