@@ -6,3 +6,4 @@ export * from "./OrdersCard";
 export * from "./loadingSkeleton";
 export * from "./ReturnHomeBtn";
 export * from "./PayBtn";
+export * from "./Footer";

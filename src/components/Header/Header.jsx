@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BsCart } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import "./Header.css";
 
-export const Header = ({ show }) => {
-  const { allCount, allPrice } = useSelector((state) => state);
+export const Header = ({ bigPizzas, show, setPizzas, pizzas, getPizzas }) => {
+  const dispatch = useDispatch();
+  const { allCount, allPrice, allPizzas } = useSelector((state) => state);
+  const [searchValue, setSearchValue] = useState("");
+
+  const search = async (e) => {
+    setSearchValue(e.target.value);
+    if (searchValue.trim()) {
+      const searchedItems = bigPizzas.filter((item) => {
+        return item.nomi.includes(searchValue.trim());
+      });
+      await getPizzas();
+      setPizzas(searchedItems);
+    } else if (searchValue.trim().length < 1) {
+      setPizzas(bigPizzas);
+    }
+  };
   return (
     <div className="header">
       <div className="header-left">
@@ -25,7 +40,7 @@ export const Header = ({ show }) => {
       {!show ? (
         <>
           <div className="header-search-cont">
-            <input type="text" />
+            <input type="text" onChange={search} />
           </div>
           <div className="header-right-wrapper">
             <Link to={"/addnewpizza"}>

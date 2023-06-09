@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { Wrapper, Header } from "../../components";
-import { ReturnBtn, PayBtn } from "../../components";
+import { ReturnBtn, PayBtn, Footer } from "../../components";
 
 import "./style.css";
 export const SinglePizza = () => {
@@ -19,12 +19,13 @@ export const SinglePizza = () => {
       const pizzaRef = doc(db, "pizzas", id);
       const res = await getDoc(pizzaRef);
       const data = res.data();
-      console.log(data);
+
       setPizza(data);
       setLoading(false);
     } catch (error) {
       console.error(error);
       setLoading(true);
+      console.log("onasini emsin");
     }
   };
 
@@ -88,6 +89,7 @@ export const SinglePizza = () => {
 
           <PayBtn />
         </footer>
+        <Footer />
       </Wrapper>
     </div>
   );

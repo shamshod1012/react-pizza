@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import { db } from "../../config/firebase";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Header, Wrapper, OrderCard } from "../../components";
+import { Header, Wrapper, OrderCard, Footer } from "../../components";
 import { ReturnBtn, PayBtn } from "../../components";
 import { BsTrash3, BsCart, BsFillCartFill } from "react-icons/bs";
 import "./Orders.css";
@@ -94,7 +94,6 @@ export const Orders = () => {
       setDeleteLoading(false);
     }
   };
-  //disabled-btn-add
 
   return (
     <div className="orders">
@@ -153,7 +152,8 @@ export const Orders = () => {
 
                   <PayBtn />
                 </div>
-              </div>{" "}
+              </div>
+              
             </>
           ) : (
             <div className="empty-order">
@@ -169,6 +169,7 @@ export const Orders = () => {
             </div>
           )}
         </div>
+        <Footer />
       </Wrapper>
     </div>
   );
