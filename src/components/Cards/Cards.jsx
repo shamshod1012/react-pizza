@@ -4,7 +4,9 @@ import { VscTriangleUp, VscTriangleDown } from "react-icons/vsc";
 import { MyLoader } from "../loadingSkeleton";
 import "./Cards.css";
 
-export const Cards = ({ setPizzas, data, loading, getOrder }) => {
+export const Cards = ({ setPizzas, data, loading, getOrder, getPizzas }) => {
+  const [active, setActive] = useState(false);
+  const [activeItem, setActiveItem] = useState("Mashhurlik");
   const [pitsalar, setPitsalar] = useState(data);
 
   const testToifalar = data.map((element) => {
@@ -17,6 +19,34 @@ export const Cards = ({ setPizzas, data, loading, getOrder }) => {
   useEffect(() => {
     setPitsalar(data);
   }, [loading]);
+
+  const sortby = async () => {
+    const pizzatest = await getPizzas();
+    if (activeItem === "Mashhurlik") {
+      setPitsalar(data);
+      return;
+    }
+    if (activeItem === "Narxi") {
+      setPitsalar(pizzatest.sort(compare));
+    }
+    if (activeItem === "Alifbo") {
+      setPitsalar(
+        pizzatest.sort(function (a, b) {
+          if (a.nomi < b.nomi) {
+            return -1;
+          }
+          if (a.nomi > b.nomi) {
+            return 1;
+          }
+          return 0;
+        })
+      );
+    }
+  };
+
+  useEffect(() => {
+    sortby();
+  }, [activeItem]);
 
   function setPizza(toifa) {
     if (toifa === "hammasi") {
@@ -38,8 +68,13 @@ export const Cards = ({ setPizzas, data, loading, getOrder }) => {
     { id: 3, title: "Alifbo" },
   ];
 
-  const [active, setActive] = useState(false);
-  const [activeItem, setActiveItem] = useState("Mashhurlik");
+  const compare = (a, b) => {
+    const aPrice = Number(a.price.replace(/[^0-9.-]+/g, ""));
+    const bPrice = Number(b.price.replace(/[^0-9.-]+/g, ""));
+
+    return aPrice - bPrice;
+  };
+  console.log();
   return (
     <main>
       <div className="main-header">

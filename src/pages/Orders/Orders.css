@@ -59,6 +59,8 @@
   height: 50px;
   border: 1px solid #d3d3d3;
   border-radius: 30px;
+  margin: 10px 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -107,6 +109,7 @@
   align-items: center;
   justify-content: center;
   color: #fff;
+  margin: 10px 0;
   background-color: #fe5f1e;
   text-decoration: none;
 }

@@ -19,7 +19,7 @@ export const Home = () => {
 
   const isUser = localStorage.getItem("isUser");
   useEffect(() => {
-    getPizzas(collectionPizzas);
+    getPizzas();
     getOrder();
   }, []);
   const getOrder = async () => {
@@ -48,15 +48,16 @@ export const Home = () => {
       console.error(error);
     }
   };
-  const getPizzas = async (coll) => {
+  const getPizzas = async () => {
     try {
       setLoading(true);
-      const data = await getDocs(coll);
+      const data = await getDocs(collectionPizzas);
       const filteredPizzas = data.docs.map((pizza) => {
         return { ...pizza.data(), id: pizza.id };
       });
       setPizzas(filteredPizzas);
       setLoading(false);
+      return filteredPizzas;
     } catch (error) {
       console.error(error);
     }
@@ -74,6 +75,7 @@ export const Home = () => {
           loading={loading}
           data={pizzas}
           getOrder={getOrder}
+          getPizzas={getPizzas}
         />
       </Wrapper>
     </div>

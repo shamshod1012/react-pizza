@@ -1,12 +1,27 @@
 import React from "react";
-import { AiFillCreditCard, AiFillDollarCircle, AiOutlineArrowLeft } from "react-icons/ai";
+import {
+  AiFillCreditCard,
+  AiFillDollarCircle,
+  AiOutlineArrowLeft,
+} from "react-icons/ai";
 import { FaCcVisa, FaCcMastercard } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { ReturnBtn } from "../../components";
 import "./style.css";
 
 export const Payment = () => {
   const { allPrice } = useSelector((state) => state);
+
+
+  const compare = (a, b) => {
+    const aPrice = Number(a.price.replace(/[^0-9.-]+/g, ""));
+    const bPrice = Number(b.price.replace(/[^0-9.-]+/g, ""));
+
+    return aPrice - bPrice;
+  };
+
+
 
   return (
     <div className="payment-page">
@@ -35,11 +50,7 @@ export const Payment = () => {
         </div>
         <p className="all-price-check">{allPrice} руб.</p>
         <input className="pay-btn-check" type="submit" value={"Pay"} />
-        <p className="return-home">
-          <Link to={"/"}>
-            <AiOutlineArrowLeft className="order-arrow" /> Orqaga qaytish
-          </Link>
-        </p>
+        <ReturnBtn />
       </form>
     </div>
   );

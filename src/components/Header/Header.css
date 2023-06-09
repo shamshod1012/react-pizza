@@ -1,6 +1,7 @@
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .header-left a {
   width: 280px;
@@ -65,15 +66,6 @@
   display: flex;
   align-items: center;
 }
-
-/* .header-right {
-  width: 250px;
-  height: 50px;
-  border-radius: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #fe5f1e;
-  position: relative;
-  text-decoration: none;
-} */
+.header-search-cont{
+  
+}

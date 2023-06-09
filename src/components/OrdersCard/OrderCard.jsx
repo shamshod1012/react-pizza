@@ -25,17 +25,18 @@ export const OrderCard = ({
   const [pizzamiqdor, setPizzamiqdor] = useState(miqdor);
   const pizzaRef = doc(db, "pizzas", id);
   const [isMinus, setIsMinus] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const plusCount = async () => {
     const data = await getDoc(pizzaRef);
     const singlePizza = data.data();
     const updPizzaCount = singlePizza.miqdor;
-   
+
     const editingItem = doc(db, "order", editid);
     const editingPizzaAll = doc(db, "pizzas", id);
     const updMiqdor = pizzamiqdor + 1;
     setPizzamiqdor(updMiqdor);
-    
+
     await updateDoc(editingItem, { miqdor: updMiqdor });
     await updateDoc(editingPizzaAll, { miqdor: updPizzaCount + 1 });
     if (updMiqdor !== 1) {
@@ -71,6 +72,7 @@ export const OrderCard = ({
   const deletePizza = async () => {
     const confirmation = window.confirm("are you sure to delete pizza?");
     if (confirmation) {
+      setDeleteLoading(true);
       const data = await getDoc(pizzaRef);
       const singlePizza = data.data();
       const updPizzaCount = singlePizza.miqdor;
@@ -78,7 +80,6 @@ export const OrderCard = ({
       const deletingItem = doc(db, "order", editid);
 
       await updateDoc(pizzaRef, { miqdor: updPizzaCount - pizzamiqdor });
-      setPizzamiqdor(0);
       await deleteDoc(deletingItem);
       getOrders();
     }
@@ -110,7 +111,14 @@ export const OrderCard = ({
       </div>
       <div className="order-card-right">
         <p className="order-card-price">{price} ₽</p>
-        <p className="order-card-delete" onClick={deletePizza}>
+        <p
+          className={
+            deleteLoading
+              ? "order-card-delete disabled-btn-add"
+              : "order-card-delete"
+          }
+          onClick={deletePizza}
+        >
           <AiOutlineCloseCircle />
         </p>
       </div>
