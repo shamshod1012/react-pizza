@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import { Header, Wrapper, Cards } from "../../components/";
+import { Header, Wrapper, Cards, Footer } from "../../components/";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../config/firebase";
 import { getDocs, collection } from "firebase/firestore";
-import { TbLoader3 } from "react-icons/tb";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./Home.css";
 
@@ -15,6 +14,7 @@ export const Home = () => {
   const collectionPizzas = collection(db, "pizzas");
   const collectionOrder = collection(db, "order");
   const [pizzas, setPizzas] = useState([]);
+  const [bigPizzas, setBigPizzas] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const isUser = localStorage.getItem("isUser");
@@ -48,6 +48,7 @@ export const Home = () => {
       console.error(error);
     }
   };
+
   const getPizzas = async () => {
     try {
       setLoading(true);
@@ -55,13 +56,16 @@ export const Home = () => {
       const filteredPizzas = data.docs.map((pizza) => {
         return { ...pizza.data(), id: pizza.id };
       });
+      setBigPizzas(filteredPizzas);
       setPizzas(filteredPizzas);
       setLoading(false);
+
       return filteredPizzas;
     } catch (error) {
       console.error(error);
     }
   };
+
   if (isUser === null) {
     navigate("/loginorauth");
     return;
@@ -69,7 +73,12 @@ export const Home = () => {
   return (
     <div className="home">
       <Wrapper>
-        <Header />
+        <Header
+          bigPizzas={bigPizzas}
+          getPizzas={getPizzas}
+          setPizzas={setPizzas}
+          pizzas={pizzas}
+        />
         <Cards
           setPizzas={setPizzas}
           loading={loading}
@@ -77,6 +86,7 @@ export const Home = () => {
           getOrder={getOrder}
           getPizzas={getPizzas}
         />
+        <Footer />
       </Wrapper>
     </div>
   );

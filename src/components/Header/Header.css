@@ -66,6 +66,11 @@
   display: flex;
   align-items: center;
 }
-.header-search-cont{
-  
+.header-search-cont input {
+  width: 300px;
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 18px;
+  border: 1px solid rgb(103, 103, 103);
+  font-size: 20px;
 }
