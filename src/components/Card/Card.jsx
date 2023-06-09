@@ -76,6 +76,16 @@ export const Card = ({
     navigate(`pizza/${id}`);
   };
 
+  const selectTop = [
+    { id: 1, title: "yupqa" },
+    { id: 2, title: "ananaviy" },
+  ];
+  const selectBottom = [
+    { id: 1, title: 26 },
+    { id: 2, title: 30 },
+    { id: 3, title: 40 },
+  ];
+
   return (
     <div className="card-container">
       <div className="img-cont">
@@ -84,38 +94,30 @@ export const Card = ({
       <p className="card-title">{nomi}</p>
       <div className="section-pitsa">
         <div className="section-pitsa-top">
-          <p
-            className={tur === "yupqa" ? "card-current-section" : ""}
-            onClick={() => settur("yupqa")}
-          >
-            Yupqa
-          </p>
-          <p
-            className={tur === "ananaviy" ? "card-current-section" : ""}
-            onClick={() => settur("ananaviy")}
-          >
-            Ananaviy
-          </p>
+          {selectTop.map((item) => {
+            return (
+              <p
+                key={item.id}
+                className={tur === item.title ? "card-current-section" : ""}
+                onClick={() => settur(item.title)}
+              >
+                {item.title}
+              </p>
+            );
+          })}
         </div>
         <div className="section-pitsa-bottom">
-          <p
-            className={razmer === 26 ? "card-current-section" : ""}
-            onClick={() => setRazmer(26)}
-          >
-            26 cm
-          </p>
-          <p
-            className={razmer === 30 ? "card-current-section" : ""}
-            onClick={() => setRazmer(30)}
-          >
-            30 cm
-          </p>
-          <p
-            className={razmer === 40 ? "card-current-section" : ""}
-            onClick={() => setRazmer(40)}
-          >
-            40 cm
-          </p>
+          {selectBottom.map((item) => {
+            return (
+              <p
+                key={item.id}
+                className={razmer === item.title ? "card-current-section" : ""}
+                onClick={() => setRazmer(item.title)}
+              >
+                {item.title} cm
+              </p>
+            );
+          })}
         </div>
       </div>
       <div className="card-footer">

@@ -21,25 +21,35 @@ export const Header = ({ show }) => {
           </div>
         </Link>
       </div>
-      {!show ? (
-        <div className="header-right-wrapper">
-          <Link to={"/addnewpizza"}>
-            <AiOutlineAppstoreAdd
-              size={30}
-              style={{ color: "#000", cursor: "pointer", marginRight: "20px" }}
-            />
-          </Link>
 
-          <div className="header-right">
-            <Link to={"./orders"}>
-              <p>{allPrice} ₽</p>
-              <span></span>
-              <p>
-                <BsCart className="header-cart" /> {allCount}
-              </p>
-            </Link>
+      {!show ? (
+        <>
+          <div className="header-search-cont">
+            <input type="text" />
           </div>
-        </div>
+          <div className="header-right-wrapper">
+            <Link to={"/addnewpizza"}>
+              <AiOutlineAppstoreAdd
+                size={30}
+                style={{
+                  color: "#000",
+                  cursor: "pointer",
+                  marginRight: "20px",
+                }}
+              />
+            </Link>
+
+            <div className="header-right">
+              <Link to={"./orders"}>
+                <p>{allPrice} ₽</p>
+                <span></span>
+                <p>
+                  <BsCart className="header-cart" /> {allCount}
+                </p>
+              </Link>
+            </div>
+          </div>
+        </>
       ) : (
         ""
       )}

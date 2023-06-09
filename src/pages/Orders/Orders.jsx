@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import { Header, Wrapper, OrderCard } from "../../components";
-import { BsTrash3, BsCart, BsFillCartFill } from "react-icons/bs";
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import { Link } from "react-router-dom";
 import {
   getDocs,
   collection,
@@ -11,16 +7,21 @@ import {
   deleteDoc,
   updateDoc,
 } from "firebase/firestore";
+import { Link } from "react-router-dom";
 import { db } from "../../config/firebase";
 import { useSelector } from "react-redux";
-import "./Orders.css";
 import { useDispatch } from "react-redux";
+import { Header, Wrapper, OrderCard } from "../../components";
+import { ReturnBtn, PayBtn } from "../../components";
+import { BsTrash3, BsCart, BsFillCartFill } from "react-icons/bs";
+import "./Orders.css";
+
 export const Orders = () => {
   const dispatch = useDispatch();
   const { allPrice, allCount } = useSelector((state) => state);
   const orderRef = collection(db, "order");
   const [data, setData] = useState([]);
-  const [allPizzas, setAllPizzas] = useState([]);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const getOrders = async () => {
     const res = await getDocs(orderRef);
@@ -75,6 +76,7 @@ export const Orders = () => {
   const deleteAll = async () => {
     const confirmation = window.confirm("Are you sure to clear all orders?");
     if (confirmation) {
+      setDeleteLoading(true);
       const pizzas = await getPizzas();
       pizzas.map(async (item) => {
         if (item.miqdor > 0) {
@@ -88,9 +90,11 @@ export const Orders = () => {
         const deletingItem = doc(db, "order", pizza.editid);
         await deleteDoc(deletingItem);
       });
+      getOrders();
+      setDeleteLoading(false);
     }
-    getOrders();
   };
+  //disabled-btn-add
 
   return (
     <div className="orders">
@@ -107,7 +111,14 @@ export const Orders = () => {
                   <p>Savat</p>
                 </div>
 
-                <div className="orders-header-right" onClick={deleteAll}>
+                <div
+                  className={
+                    deleteLoading
+                      ? "orders-header-right disabled-btn-add"
+                      : "orders-header-right"
+                  }
+                  onClick={deleteAll}
+                >
                   <p className="orders-trash">
                     <BsTrash3 />
                   </p>
@@ -132,12 +143,7 @@ export const Orders = () => {
                     Jami Pitsalar: <span>{allCount} dona</span>
                   </p>
 
-                  <p className="return-home">
-                    <Link to={"/"}>
-                      <AiOutlineArrowLeft className="order-arrow" /> Orqaga
-                      qaytish
-                    </Link>
-                  </p>
+                  <ReturnBtn />
                 </div>
 
                 <div className="orders-footer-right">
@@ -145,10 +151,7 @@ export const Orders = () => {
                     Umumiy narx: <span>{allPrice} ₽</span>
                   </p>
 
-                  <p className="pay-btn">
-                    {" "}
-                    <Link to={"/payment"}>Buyurtma qilish</Link>
-                  </p>
+                  <PayBtn />
                 </div>
               </div>{" "}
             </>
@@ -161,12 +164,7 @@ export const Orders = () => {
                   qayting va pizza buyurtma qiling.
                 </p>
                 <BsFillCartFill size={100} />
-                <div className="return-home">
-                  <Link to={"/"}>
-                    <AiOutlineArrowLeft className="order-arrow" /> Orqaga
-                    qaytish
-                  </Link>
-                </div>
+                <ReturnBtn />
               </div>
             </div>
           )}

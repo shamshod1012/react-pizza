@@ -1,11 +1,12 @@
 import ContentLoader from "react-content-loader";
 import React, { useState, useEffect } from "react";
-import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { Wrapper, Header } from "../../components";
 import { useParams } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../config/firebase";
+import { Wrapper, Header } from "../../components";
+import { ReturnBtn, PayBtn } from "../../components";
+
 import "./style.css";
 export const SinglePizza = () => {
   const { id } = useParams();
@@ -78,20 +79,11 @@ export const SinglePizza = () => {
           )}
         </main>
         <footer className="single-pizza-footer">
-          <div className="return-home">
-            <Link to={"/"}>
-              <AiOutlineArrowLeft className="order-arrow" /> Orqaga qaytish
-            </Link>
-          </div>
+          <ReturnBtn />
 
-          <p className="pay-btn">
-            <Link to={"/payment"}>Buyurtma qilish</Link>
-          </p>
+          <PayBtn />
         </footer>
       </Wrapper>
     </div>
   );
 };
-/*
-
- */

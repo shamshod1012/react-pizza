@@ -4,6 +4,7 @@ import { GiFullPizza } from "react-icons/gi";
 import { db } from "../../config/firebase";
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
+import { ReturnBtn } from "../../components";
 import "./style.css";
 import { AiOutlineLoading } from "react-icons/ai";
 export const AddNewPizza = () => {
@@ -105,8 +106,9 @@ export const AddNewPizza = () => {
           {" "}
           {loading && <AiOutlineLoading className="loading-auth" />} Submit
         </button>
+        <ReturnBtn />
       </form>
     </div>
   );
 };
-/*  */
+
