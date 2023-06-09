@@ -14,13 +14,18 @@ export const SinglePizza = () => {
   const [loading, setLoading] = useState(true);
 
   const getPizza = async () => {
-    setLoading(true);
-    const pizzaRef = doc(db, "pizzas", id);
-    const res = await getDoc(pizzaRef);
-    const data = res.data();
-    console.log(data);
-    setPizza(data);
-    setLoading(false);
+    try {
+      setLoading(true);
+      const pizzaRef = doc(db, "pizzas", id);
+      const res = await getDoc(pizzaRef);
+      const data = res.data();
+      console.log(data);
+      setPizza(data);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(true);
+    }
   };
 
   const MyLoader = (props) => {
