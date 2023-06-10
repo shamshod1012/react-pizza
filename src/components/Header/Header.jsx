@@ -12,13 +12,15 @@ export const Header = ({ bigPizzas, show, setPizzas, pizzas, getPizzas }) => {
 
   const search = async (e) => {
     setSearchValue(e.target.value);
-    if (searchValue.trim()) {
+    if (searchValue.trim().length) {
       const searchedItems = bigPizzas.filter((item) => {
         return item.nomi.includes(searchValue.trim());
       });
       await getPizzas();
       setPizzas(searchedItems);
-    } else if (searchValue.trim().length < 1) {
+    } else  {
+      await getPizzas();
+
       setPizzas(bigPizzas);
     }
   };
