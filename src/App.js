@@ -9,8 +9,8 @@ import {
   Error,
   SinglePizza,
   Payment,
+  LoginOrAuth,
 } from "./pages";
-import { LoginOrAuth } from "./pages/LoginOrAuth/LoginOrAuth";
 import "./App.css";
 
 const router = createBrowserRouter([

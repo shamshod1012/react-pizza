@@ -1,4 +1,4 @@
-export * from "./LoginOrAuth/LoginOrAuth";
+export * from "./LoginOrAuth";
 export * from "./Home";
 export * from "./Orders";
 export * from "./Auth";
