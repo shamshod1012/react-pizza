@@ -26,8 +26,11 @@ export const OrderCard = ({
   const pizzaRef = doc(db, "pizzas", id);
   const [isMinus, setIsMinus] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const [addLoading, setAddLoading] = useState(false);
+  const [minusLoading, setMinusLoading] = useState(false);
 
   const plusCount = async () => {
+    setAddLoading(true);
     const data = await getDoc(pizzaRef);
     const singlePizza = data.data();
     const updPizzaCount = singlePizza.miqdor;
@@ -43,9 +46,11 @@ export const OrderCard = ({
       setIsMinus(true);
     }
     getOrdertest();
+    setAddLoading(false);
   };
 
   const minusCount = async () => {
+    setMinusLoading(true);
     const data = await getDoc(pizzaRef);
     const singlePizza = data.data();
     const updPizzaCount = singlePizza.miqdor;
@@ -59,6 +64,7 @@ export const OrderCard = ({
       setIsMinus(false);
     }
     getOrdertest();
+    setMinusLoading(false);
   };
 
   useEffect(() => {
@@ -85,7 +91,8 @@ export const OrderCard = ({
     }
     getOrdertest();
   };
-
+  console.log(minusLoading);
+  console.log(addLoading);
   return (
     <div className="order-card">
       <img src={img} alt="pitsa rasmi" />
@@ -98,16 +105,20 @@ export const OrderCard = ({
       </div>
 
       <div className="order-card-btns">
-        <p
-          onClick={minusCount}
-          className={isMinus ? "enabled-btn" : "disabled-btn"}
-        >
-          <AiOutlineMinusCircle />
-        </p>
+        <div className={minusLoading ? "disabled-btn-add" : ""}>
+          <p
+            onClick={minusCount}
+            className={isMinus ? "enabled-btn" : "disabled-btn"}
+          >
+            <AiOutlineMinusCircle />
+          </p>
+        </div>
         <span>{pizzamiqdor}</span>
-        <p onClick={plusCount} className={"enabled-btn"}>
-          <AiOutlinePlusCircle />
-        </p>
+        <div className={addLoading ? "disabled-btn-add" : ""}>
+          <p onClick={plusCount} className={"enabled-btn"}>
+            <AiOutlinePlusCircle />
+          </p>
+        </div>
       </div>
       <div className="order-card-right">
         <p className="order-card-price">{price} ₽</p>
