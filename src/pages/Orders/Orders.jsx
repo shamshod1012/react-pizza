@@ -153,7 +153,6 @@ export const Orders = () => {
                   <PayBtn />
                 </div>
               </div>
-              
             </>
           ) : (
             <div className="empty-order">
