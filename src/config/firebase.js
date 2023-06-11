@@ -3,7 +3,7 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-apiKey: "AIzaSyCaS3as5UcNK0rdbCIiAxHOetfGTA-FEgY",
+  apiKey: "AIzaSyCaS3as5UcNK0rdbCIiAxHOetfGTA-FEgY",
   authDomain: "react-pizza-23335.firebaseapp.com",
   projectId: "react-pizza-23335",
   storageBucket: "react-pizza-23335.appspot.com",
